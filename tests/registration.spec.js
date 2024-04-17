@@ -23,12 +23,14 @@ test.describe("Validate registration page", () => {
 
     const pm = new PageManager(page);
     await pm.onRegisterPage().validateFieldChangeColor();
+    
   });
 
   test("Fields visibility", async ({ page }) => {
 
     const pm = new PageManager(page);
-    await pm.onRegisterPage().fieldsVisibility();    
+    await pm.onRegisterPage().fieldsVisibility();
+
   });
 });  
 
