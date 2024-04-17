@@ -4,6 +4,7 @@ import { PageManager } from "../page-objects/pageManager";
 test.describe("Navigation", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
+    
   });
 
   test("Title test", async ({ page }) => {
