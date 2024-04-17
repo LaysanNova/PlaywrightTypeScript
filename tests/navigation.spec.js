@@ -19,6 +19,7 @@ test.describe("Navigation", () => {
     await pm.navigateTo().homePage();
     await pm.navigateTo().swaggerPage();
     await pm.navigateTo().githubPage();
+    
   });
 
   test("login UI", async ({ page }) => {
