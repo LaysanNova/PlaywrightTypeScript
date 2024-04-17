@@ -18,7 +18,7 @@ test.describe("Navigation", () => {
     await pm.navigateTo().shoppingCartPage();
     await pm.navigateTo().homePage();
     await pm.navigateTo().swaggerPage();
-    await pm.navigateTo().githubPage();
+    await pm.navigateTo().githubPage();    
 
   });
 
@@ -26,7 +26,7 @@ test.describe("Navigation", () => {
     const pm = new PageManager(page);
     await pm.navigateTo().loginPage();
     await pm.onloginPage().enterValidCredentialsAndClickLogin();
-    
+
   });  
 });
 
