@@ -29,7 +29,14 @@ test.describe("Validate registration page", () => {
   test("Fields visibility", async ({ page }) => {
 
     const pm = new PageManager(page);
-    await pm.onRegisterPage().fieldsVisibility();
+    await pm.onRegisterPage().elementsVisibility();
+
+  });
+
+  test("Register new user", async ({ page }) => {
+
+    const pm = new PageManager(page);
+    await pm.onRegisterPage().registerAsNewUser();
 
   });
 });  

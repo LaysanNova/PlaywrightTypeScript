@@ -1,9 +1,9 @@
 import { Locator, Page, expect } from "@playwright/test";
-import { HelperBase } from "./helperBase";
 import { getStyle } from "../tests/helper";
 import { text } from "stream/consumers";
+import { BasePage } from "./BasePage";
 
-export class RegistrationPage extends HelperBase {
+export class RegistrationPage extends BasePage {
     
   readonly header: Locator;
   readonly content: Locator;
@@ -61,9 +61,9 @@ export class RegistrationPage extends HelperBase {
 
   }
 
-  async fieldsVisibility() {
+  async elementsVisibility() {
 
-    const userName = this.content.locator('label mat-label').filter({hasText: "User name"});
+    const userName = this.content.locator('label mat-label').filter({hasText: "Username"});
     const password = this.content.locator('label mat-label').getByText("Password", {exact: true});
     const confirmPassword = this.content.locator('label mat-label').filter({hasText: "Confirm Password"});
 

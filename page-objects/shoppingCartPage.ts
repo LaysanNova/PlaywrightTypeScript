@@ -1,9 +1,9 @@
 import { Page, expect } from "@playwright/test";
+import { BasePage } from "./BasePage";
 
-export class ShoppingCartPage {
-    page: Page;
+export class ShoppingCartPage extends BasePage {
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
     }
 }    
