@@ -26,10 +26,10 @@ test.describe("Validate registration page", () => {
     
   });
 
-  test("Fields visibility", async ({ page }) => {
+  test("Elements visibility", async ({ page }) => {
 
     const pm = new PageManager(page);
-    await pm.onRegisterPage().fieldsVisibility();
+    await pm.onRegisterPage().elementsVisibility();
 
   });
 });  
