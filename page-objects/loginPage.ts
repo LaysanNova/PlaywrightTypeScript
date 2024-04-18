@@ -21,8 +21,11 @@ export class LoginPage extends BasePage {
   }
 
   async registerAsNewUser() {
+
     const registerButton = this.page.getByRole("button", { name: "Register" });
     await registerButton.click();
+
+    expect(this.page.url()).toContain('/register');
 
     return new RegistrationPage(this.page);
   }

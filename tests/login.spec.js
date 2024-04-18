@@ -4,7 +4,8 @@ import { getStyle } from "./helper";
 
 test.describe("Navigation", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');    
+    await page.goto('/'); 
+       
   });
 
   test("Validate register modal opened after login page", async ({ page }) => {
@@ -46,10 +47,17 @@ test.describe("Navigation", () => {
 
   });
 
-  test("Fields visibility", async ({ page }) => {
+  test("Elements visibility", async ({ page }) => {
     const pm = new PageManager(page);
     const loginPage = await pm.navigateTo().loginPage();
 
     await loginPage.elementsVisibility();
+  });
+
+  test("Register new user navigation", async ({ page }) => {
+
+    const pm = new PageManager(page);
+    await pm.navigateTo().loginPage();
+    await pm.onloginPage().registerAsNewUser();
   });
 });
