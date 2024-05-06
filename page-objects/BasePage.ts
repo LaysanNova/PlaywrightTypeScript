@@ -77,7 +77,8 @@ export class BasePage {
     const isVisible = await this.page
       .getByRole("button", { name: "Login" })
       .isVisible();
-
+      
+    // @ts-ignore
     expect(this.page.url()).toBe(playwrightConfig.use.baseURL)  
 
     if (isVisible == true) {
