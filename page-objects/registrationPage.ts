@@ -63,7 +63,7 @@ export class RegistrationPage extends BasePage {
 
   async elementsVisibility() {
 
-    const userName = this.content.locator('label mat-label').filter({hasText: "Username"});
+    const userName = this.content.locator('label mat-label').filter({hasText: "User name"});
     const password = this.content.locator('label mat-label').getByText("Password", {exact: true});
     const confirmPassword = this.content.locator('label mat-label').filter({hasText: "Confirm Password"});
 
