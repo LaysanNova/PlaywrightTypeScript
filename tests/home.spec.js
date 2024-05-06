@@ -15,6 +15,5 @@ test.describe("Navigation", () => {
 
     expect(page).toHaveTitle('BookCart'); 
     expect(page.url()).toContain("/register");
-
   }); 
 });
