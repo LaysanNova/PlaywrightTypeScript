@@ -1,35 +1,22 @@
-const { test, expect } = require("@playwright/test");
-import { PageManager } from "../page-objects/pageManager";
+const { test, expect } = require("../fixtures/setupPage");
 
 test.describe("Validate registration page", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+  test("Validate header color > button color ", async ({ registrationPage }) => {
 
-    const pm = new PageManager(page);    
-    const loginPage = await pm.navigateTo().loginPage();
-    await loginPage.registerAsNewUser();
-
-  });
-
-  test("Validate header color > button color ", async ({ page }) => {
-
-    const pm = new PageManager(page);
-    await pm.onRegisterPage().validateHeader();  
-    await pm.onRegisterPage().validateLoginButton();
+    await registrationPage.validateHeader();
+    await registrationPage.validateLoginButton();
     
   });
 
-  test("Validate fields change color", async ({ page }) => {
+  test("Validate fields change color", async ({ registrationPage }) => {
 
-    const pm = new PageManager(page);
-    await pm.onRegisterPage().validateFieldChangeColor();
+    await registrationPage.validateFieldChangeColor();
     
   });
 
-  test("Elements visibility", async ({ page }) => {
+  test("Elements visibility", async ({ registrationPage }) => {
 
-    const pm = new PageManager(page);
-    await pm.onRegisterPage().elementsVisibility();
+    await registrationPage.elementsVisibility();
 
   });
 });  

@@ -7,7 +7,8 @@ export class HeaderPage {
         this.page = page;
     }
 
-    async logo() {
-        
-    }
+
+    
+
+
 }   

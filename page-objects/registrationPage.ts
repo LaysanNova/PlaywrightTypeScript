@@ -1,6 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
 import { getStyle } from "../tests/helper";
-import { text } from "stream/consumers";
 import { BasePage } from "./BasePage";
 
 export class RegistrationPage extends BasePage {

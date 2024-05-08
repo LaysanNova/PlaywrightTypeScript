@@ -1,19 +1,35 @@
-const { test, expect } = require("@playwright/test");
-import { PageManager } from "../page-objects/pageManager";
-import { getStyle } from "./helper";
+const { test, expect } = require("../fixtures/setupPage");
+import { categories } from "../testData/data";
+require("dotenv").config();
 
-test.describe("Navigation", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/'); 
-       
+const url = process.env.url;
+
+test.describe("Home page", () => {
+  test("Validate All categories on the page", async ({ homePage }) => {
+    homePage.validateCategoryList();    
+  }); 
+
+  test("Validate books on the page", async ({ homePage }) => {
+    homePage.validateBooks();
   });
 
-  test("Validate All categories are ", async ({ page }) => {
-    const pm = new PageManager(page);
-    await pm.navigateTo().loginPage();
-    await pm.onloginPage().registerAsNewUser();
-
-    expect(page).toHaveTitle('BookCart'); 
-    expect(page.url()).toContain("/register");
+  test("Validate categories filter books", async ({ homePage }) => {
+    homePage.validateBooks();
   }); 
-});
+
+  test("Validate categories ALL active", async ({ page, homePage }) => {
+
+    const allCategories = page.locator('mat-list-item').first();
+    homePage.checkElementBackgroundColorAndColor(allCategories, 'rgb(251, 100, 27)', 'rgb(33, 37, 41)');
+
+  });
+
+  test("Validate categories URL", async ({ homePage }) => {
+
+    for (const category of categories) {
+      if (!category.includes("All")) {
+        await homePage.clickCategory(category, url + `filter?category=${category.toLowerCase()}`);  
+      }          
+    }
+  });
+});  

@@ -1,21 +1,35 @@
-const { test, expect } = require("../fixtures/setupPage");
+const { test, expect } = require("@playwright/test");
+import { PageManager } from "../page-objects/pageManager";
 import { getStyle } from "./helper";
 
 test.describe("Navigation", () => {
-  test("Validate register modal opened after login page", async ({ page, loginPage }) => {
-    await loginPage.registerAsNewUser();
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/'); 
+       
+  });
+
+  test("Validate register modal opened after login page", async ({ page }) => {
+    const pm = new PageManager(page);
+    await pm.navigateTo().loginPage();
+    await pm.onloginPage().registerAsNewUser();
 
     expect(page).toHaveTitle('BookCart'); 
     expect(page.url()).toContain("/register");
 
   }); 
 
-  test("Validate successful login to account (UI)", async ({ loginPage }) => {
-    const account = await loginPage.validateLoginToAccount();
+  test("Validate successful login to account (UI)", async ({ page }) => {
+    const pm = new PageManager(page);
+    await pm.navigateTo().loginPage();
+    const account = await pm.onloginPage().validateLoginToAccount();
+
     expect(account).toContain('reena');
   });
+
   
-  test("Validate login page color", async ({ page, loginPage }) => {
+  test("Validate login page color", async ({ page }) => {
+    const pm = new PageManager(page);
+    const loginPage = await pm.navigateTo().loginPage();
 
     const loginMat = page.locator('app-login mat-card');
     const loginHeader = loginMat.locator('mat-card-header');
@@ -33,11 +47,17 @@ test.describe("Navigation", () => {
 
   });
 
-  test("Elements visibility", async ({ loginPage }) => {
+  test("Elements visibility", async ({ page }) => {
+    const pm = new PageManager(page);
+    const loginPage = await pm.navigateTo().loginPage();
+
     await loginPage.elementsVisibility();
   });
 
-  test("Register new user navigation", async ({ loginPage }) => {
-    await loginPage.registerAsNewUser();
+  test("Register new user navigation", async ({ page }) => {
+
+    const pm = new PageManager(page);
+    await pm.navigateTo().loginPage();
+    await pm.onloginPage().registerAsNewUser();
   });
 });

@@ -1,5 +1,4 @@
 import { Page, expect } from "@playwright/test";
-import { get } from "http";
 import { RegistrationPage } from "./registrationPage";
 import { AccountPage } from "./accountPage";
 import { BasePage } from "./BasePage";

@@ -1,7 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
-import { HomePage } from "./homePage";
-import { AccountPage } from "./accountPage";
-import playwrightConfig from '../playwright.config';
+import playwrightConfig from "../playwright.config";
 
 export class BasePage {
   readonly page: Page;
@@ -68,7 +66,6 @@ export class BasePage {
    * @returns - homePgae or AccountPage
    */
   async clickLogoGoHomePage() {
- 
     await this.page.getByRole("button", { name: " Book Cart " }).click();
     await this.page.waitForSelector("mat-nav-list");
 
@@ -77,14 +74,8 @@ export class BasePage {
     const isVisible = await this.page
       .getByRole("button", { name: "Login" })
       .isVisible();
-      
-    // @ts-ignore
-    expect(this.page.url()).toBe(playwrightConfig.use.baseURL)  
 
-    if (isVisible == true) {
-      return new HomePage(this.page);
-    } else {
-      return new AccountPage(this.page);
-    }
+    // @ts-ignore
+    expect(this.page.url()).toBe(playwrightConfig.use.baseURL);
   }
 }
