@@ -1,8 +1,11 @@
 const { test, expect } = require("../fixtures/setupPage");
 import { categories } from "../testData/data";
-require("dotenv").config();
 
-const url = process.env.url;
+// require("dotenv").config();
+
+// const url = process.env.url;
+
+const { use } = require("../playwright.config");
 
 test.describe("Home page", () => {
   test("Validate All categories on the page", async ({ homePage }) => {
@@ -28,7 +31,7 @@ test.describe("Home page", () => {
 
     for (const category of categories) {
       if (!category.includes("All")) {
-        await homePage.clickCategory(category, url + `filter?category=${category.toLowerCase()}`);  
+        await homePage.clickCategory(category, use.baseURL + `filter?category=${category.toLowerCase()}`);  
       }          
     }
   });
