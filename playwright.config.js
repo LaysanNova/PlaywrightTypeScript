@@ -25,7 +25,7 @@ module.exports = defineConfig({
     // ['html'],
     ['allure-playwright'],
     // ['list'],
-    // ['dot']
+    ['dot']
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
