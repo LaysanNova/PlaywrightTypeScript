@@ -7,7 +7,7 @@ const url = process.env.url;
 exports.expect = expect;
 exports.test = test.extend({
   homePage: async ({ page }, use) => {
-    await page.goto(url);   
+    await page.goto('/');   
     const pm = new PageManager(page);
     const homePage = pm.onHomePage();
     await use(homePage);
