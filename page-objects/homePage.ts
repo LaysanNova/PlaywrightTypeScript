@@ -5,10 +5,14 @@ import { BasePage } from "./BasePage";
 export class HomePage extends BasePage {
 
     readonly categoryMat: Locator;
+    readonly books: Locator;
+    public priceFilter: Locator;    
 
     constructor(page: Page) {        
         super(page);
         this.categoryMat = this.page.locator("mat-nav-list");
+        this.books = page.locator('app-book-card');
+        this.priceFilter = page.getByRole('slider');
       }
 
     async getCategories() {
@@ -30,7 +34,7 @@ export class HomePage extends BasePage {
     }
 
     async getBooks() {
-        return await this.page.locator("app-book-card").all();        
+        return await this.books.all();        
     }
 
     async validateBooks() {
@@ -43,4 +47,28 @@ export class HomePage extends BasePage {
         await this.page.getByText(category, { exact: true }).click();
         expect(this.page.url()).toBe(url);       
     }
+
+    async getBookPrices() {
+
+        return await this.books.locator('p').all();
+    }  
+
+    async setPriceFilter(maxPrice: number) {
+
+        await this.priceFilter.fill(maxPrice.toString());
+        await this.page.waitForLoadState("networkidle");
+     
+    }
+
+    async validateBooksUnderPrice(maxPrice: number) {
+
+        const bookPrices = await this.getBookPrices();
+
+        let price;
+        for (const book of bookPrices) {
+            price = await book.textContent();      
+            price = price.replace(',', '').replace('₹', '');
+            expect(Number(price)).toBeLessThanOrEqual(maxPrice);        
+        }
+    }        
 }    

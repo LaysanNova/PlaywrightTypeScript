@@ -61,6 +61,18 @@ export class BasePage {
     expect(elementProperty).toBe(color);
   }
 
+
+  /**
+   * Check Atribute value
+   */
+  async checkAtributeValue(locator: Locator, atributeName: string, value: string) {
+
+    const atributeValue = await locator.getAttribute(atributeName);
+    expect(atributeValue).toBe(value);
+
+  };
+
+
   /**
    * Click logo return you to home page
    * @returns - homePgae or AccountPage
